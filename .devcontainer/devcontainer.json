@@ -1,0 +1,26 @@
+{
+    "name": "gomonorepo",
+    "dockerComposeFile": "docker-compose.yml",
+    "workspaceFolder": "/app",
+    "service": "gomonorepo",
+    "customizations": {
+        "vscode": {
+          "settings": {},
+          "extensions": [
+            "golang.Go",
+            "eamodio.gitlens",
+            "42Crunch.vscode-openapi",
+            "arjun.swagger-viewer",
+            "clemenspeters.format-json",
+            "GitHub.copilot",
+            "ms-vsliveshare.vsliveshare",
+            "BazelBuild.vscode-bazel"
+          ]
+        }
+    },
+    "forwardPorts": [7201, 7202],
+    "features": {
+      "ghcr.io/devcontainers/features/git:1": {}
+    },
+    "overrideCommand": true
+}

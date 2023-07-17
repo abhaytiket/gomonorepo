@@ -1,0 +1,7 @@
+{
+    "bazel.buildifierFixOnFormat": true,
+    "bazel.enableCodeLens": true,
+    "bazel.executable": "/go/bin/bazelisk",
+}
+
+

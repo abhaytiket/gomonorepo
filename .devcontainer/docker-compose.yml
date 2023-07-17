@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+  gomonorepo:
+    build: .
+    volumes:
+      - ..:/app
+    networks:
+      - gomonorepo-net
+networks:
+  gomonorepo-net:
+    driver: bridge

@@ -1,0 +1,27 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+load("@io_bazel_rules_docker//container:container.bzl", "container_image")
+
+go_library(
+    name = "app1_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/abhaytiket/gomonorepo/services/app1",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//lib/msg",
+        "@com_github_go_chi_chi_v5//:go_default_library",
+        "@com_github_go_chi_chi_v5//middleware:go_default_library",
+    ],
+)
+
+go_binary(
+    name = "app1",
+    embed = [":app1_lib"],
+    visibility = ["//visibility:public"],
+)
+
+container_image(
+    name = "image",
+    base = "@alpine_linux//image",
+    entrypoint = ["/app1"],
+    files = [":app1"],
+)
