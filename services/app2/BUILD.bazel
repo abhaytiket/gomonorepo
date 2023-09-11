@@ -1,5 +1,6 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
-load("@io_bazel_rules_docker//container:container.bzl", "container_image")
+load("@rules_oci//oci:defs.bzl", "oci_image")
+load("@rules_pkg//:pkg.bzl", "pkg_tar")
 
 go_library(
     name = "app2_lib",
@@ -18,9 +19,29 @@ go_binary(
     visibility = ["//visibility:public"],
 )
 
-container_image(
+pkg_tar(
+    name = "app2_layer",
+    srcs = [":app2"],
+    # If the binary depends on RUNFILES, uncomment the attribute below.
+    # include_runfiles = True
+)
+
+oci_image(
     name = "image",
-    base = "@alpine_linux//image",
+    base = "@distroless_base",
     entrypoint = ["/app2"],
-    files = [":app2"],
+    tars = [":app2_layer"],
+)
+
+oci_tarball(
+    name = "app2_tarball",
+    image = ":image",
+    repo_tags = ["app2:latest"]
+)
+
+oci_push(
+    name = "push",
+    image = ":image",
+    repository = "sychonet/gomonorepo_app2",
+    remote_tags = ["latest"]
 )
