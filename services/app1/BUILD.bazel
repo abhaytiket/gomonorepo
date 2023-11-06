@@ -43,7 +43,7 @@ oci_tarball(
 oci_push(
     name = "push",
     image = ":image",
-    repository = "index.docker.io/v1/sychonet/gomonorepo_app1",
-    remote_tags = ["latest"]
+    repository = "index.docker.io/sychonet/gomonorepo_app1",
+    remote_tags = ["v0.0.2"]
 )
 

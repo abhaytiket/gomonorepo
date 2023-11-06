@@ -4,6 +4,7 @@ services:
     build: .
     volumes:
       - ..:/app
+      - .docker:/root/.docker
     networks:
       - gomonorepo-net
 networks:
