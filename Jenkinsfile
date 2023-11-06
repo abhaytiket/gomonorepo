@@ -5,7 +5,7 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sh 'bazelisk --version'
+                sh 'bazelisk run //services/app1:push'
             }
         }
     }
